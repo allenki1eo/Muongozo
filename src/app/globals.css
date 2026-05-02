@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand: #6366f1;
+}
+
+html {
+  scroll-behavior: smooth;
+}
