@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Muongozo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 320px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 13px;
+      color: #111;
+      background: #fff;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .logo {
+      width: 28px; height: 28px;
+      background: #6366f1;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-weight: 700; font-size: 13px;
+    }
+    .header-text h1 { font-size: 14px; font-weight: 600; }
+    .header-text p { font-size: 11px; color: #888; margin-top: 1px; }
+
+    .managed-banner {
+      background: #f0fdf4;
+      border-bottom: 1px solid #bbf7d0;
+      padding: 8px 16px;
+      font-size: 11px;
+      color: #166534;
+      display: none;
+    }
+    .managed-banner.show { display: block; }
+
+    .body { padding: 14px 16px; }
+
+    label { display: block; font-size: 11px; font-weight: 500; color: #555; margin-bottom: 4px; margin-top: 12px; }
+    label:first-of-type { margin-top: 0; }
+    input, select {
+      width: 100%;
+      border: 1px solid #e5e5e5;
+      border-radius: 7px;
+      padding: 7px 10px;
+      font-size: 12px;
+      outline: none;
+      background: #fafafa;
+    }
+    input:focus, select:focus { border-color: #6366f1; background: #fff; box-shadow: 0 0 0 2px #6366f140; }
+    input:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .status { font-size: 11px; color: #888; margin-top: 6px; min-height: 16px; }
+    .status.ok { color: #16a34a; }
+    .status.err { color: #dc2626; }
+
+    .btn-row { display: flex; gap: 8px; margin-top: 14px; }
+    button {
+      flex: 1;
+      padding: 8px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: filter .15s;
+    }
+    button:hover { filter: brightness(.92); }
+    .btn-primary { background: #6366f1; color: #fff; }
+    .btn-secondary { background: #f0f0f0; color: #333; }
+
+    .divider { height: 1px; background: #f0f0f0; margin: 14px 0; }
+
+    .section-title { font-size: 11px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 8px; }
+
+    .deploy-method {
+      background: #f8f7ff;
+      border: 1px solid #e0e0ff;
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+    .deploy-method:hover { border-color: #6366f1; }
+    .deploy-method h3 { font-size: 12px; font-weight: 600; color: #111; }
+    .deploy-method p { font-size: 11px; color: #666; margin-top: 2px; line-height: 1.4; }
+    .deploy-method .badge {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 1px 5px;
+      border-radius: 4px;
+      margin-left: 5px;
+      vertical-align: middle;
+    }
+    .badge-rec { background: #dcfce7; color: #166534; }
+    .badge-fast { background: #fef9c3; color: #854d0e; }
+
+    .code-block {
+      background: #1e1e2e;
+      color: #a6e3a1;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      white-space: pre-wrap;
+      word-break: break-all;
+      display: none;
+      margin-top: 8px;
+    }
+    .code-block.show { display: block; }
+    .copy-btn {
+      background: #2a2a3e;
+      color: #cdd6f4;
+      border: none;
+      padding: 4px 10px;
+      border-radius: 5px;
+      font-size: 10px;
+      cursor: pointer;
+      margin-top: 6px;
+      display: none;
+    }
+    .copy-btn.show { display: inline-block; }
+
+    .footer { padding: 8px 16px 12px; text-align: center; font-size: 10px; color: #bbb; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">M</div>
+    <div class="header-text">
+      <h1>Muongozo AI Guide</h1>
+      <p id="subtitle">Configure your workspace guide</p>
+    </div>
+  </div>
+
+  <div class="managed-banner" id="managedBanner">
+    Configured by your IT department. Settings are locked.
+  </div>
+
+  <div class="body">
+    <label for="orgId">Organisation ID</label>
+    <input type="text" id="orgId" placeholder="demo-org" />
+
+    <label for="apiKey">Widget API Key</label>
+    <input type="password" id="apiKey" placeholder="mzk_..." />
+
+    <label for="serverUrl">Server URL</label>
+    <input type="url" id="serverUrl" placeholder="http://localhost:3000" />
+
+    <label for="position">Widget Position</label>
+    <select id="position">
+      <option value="bottom-right">Bottom Right</option>
+      <option value="bottom-left">Bottom Left</option>
+    </select>
+
+    <label for="disabledDomains">Skip these domains (comma-separated)</label>
+    <input type="text" id="disabledDomains" placeholder="mail.google.com, notion.so" />
+
+    <div class="status" id="status"></div>
+
+    <div class="btn-row">
+      <button class="btn-primary" id="saveBtn">Save &amp; Activate</button>
+      <button class="btn-secondary" id="testBtn">Test on this tab</button>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section-title">Deploy to your whole org without code changes</div>
+
+    <div class="deploy-method" id="itDeployToggle">
+      <h3>Chrome Enterprise Policy <span class="badge badge-rec">Recommended</span></h3>
+      <p>IT pushes the extension + config to every managed Chrome. Zero user action needed.</p>
+    </div>
+    <div class="code-block" id="itPolicyCode"></div>
+    <button class="copy-btn" id="copyPolicy">Copy JSON</button>
+
+    <div class="deploy-method" id="bookmarkToggle">
+      <h3>Bookmarklet <span class="badge badge-fast">Instant demo</span></h3>
+      <p>Drag this link to your bookmarks bar. Click it on any page to activate the guide.</p>
+    </div>
+    <div class="code-block" id="bookmarkCode"></div>
+    <button class="copy-btn" id="copyBookmark">Copy link</button>
+
+    <div class="deploy-method" id="gtmToggle">
+      <h3>Google Tag Manager</h3>
+      <p>Add a Custom HTML tag in GTM — no developer required. Works on any GTM-enabled site.</p>
+    </div>
+    <div class="code-block" id="gtmCode"></div>
+    <button class="copy-btn" id="copyGtm">Copy snippet</button>
+  </div>
+
+  <div class="footer">Muongozo × Claude · <a href="#" id="dashboardLink" style="color:#6366f1;text-decoration:none;">Open Dashboard</a></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

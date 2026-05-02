@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "properties": {
+    "orgId": {
+      "title": "Muongozo Organisation ID",
+      "description": "Your organisation ID from the Muongozo dashboard.",
+      "type": "string"
+    },
+    "apiKey": {
+      "title": "Muongozo Widget API Key",
+      "description": "Widget API key from the Muongozo dashboard.",
+      "type": "string"
+    },
+    "serverUrl": {
+      "title": "Muongozo Server URL",
+      "description": "Your Muongozo deployment URL (default: https://muongozo.app).",
+      "type": "string"
+    },
+    "position": {
+      "title": "Widget Position",
+      "description": "Where to anchor the widget button: bottom-right or bottom-left.",
+      "type": "string",
+      "enum": ["bottom-right", "bottom-left"]
+    },
+    "disabledDomains": {
+      "title": "Disabled Domains",
+      "description": "Comma-separated list of domains where the widget should NOT appear.",
+      "type": "string"
+    }
+  }
+}

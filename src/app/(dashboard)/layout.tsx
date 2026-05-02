@@ -1,10 +1,11 @@
 import Link from 'next/link';
-import { LayoutDashboard, BookOpen, BarChart2, Settings, ExternalLink } from 'lucide-react';
+import { LayoutDashboard, BookOpen, BarChart2, Settings, ExternalLink, Download } from 'lucide-react';
 
 const nav = [
   { href: '/dashboard', label: 'Overview', icon: LayoutDashboard },
   { href: '/dashboard/knowledge', label: 'Knowledge Base', icon: BookOpen },
   { href: '/dashboard/analytics', label: 'Analytics', icon: BarChart2 },
+  { href: '/dashboard/install', label: 'Install Guide', icon: Download },
   { href: '/dashboard/settings', label: 'Settings', icon: Settings },
 ];
 
