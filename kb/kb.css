@@ -1,0 +1,6 @@
+body { font-family: Arial, sans-serif; margin: 0; background: #f8fafc; color: #0f172a; }
+main { max-width: 900px; margin: 24px auto; padding: 0 16px; }
+.card { background: white; border: 1px solid #cbd5e1; border-radius: 10px; padding: 12px; margin-bottom: 12px; }
+input[type="search"], input[type="file"] { width: 100%; margin-top: 8px; }
+#results article { border-top: 1px solid #e2e8f0; padding: 8px 0; }
+button { background: #2563eb; color: white; border: none; border-radius: 8px; padding: 8px 12px; cursor: pointer; }

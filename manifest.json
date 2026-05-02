@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Muongozo Guide",
+  "version": "0.2.0",
+  "description": "Context-aware step-by-step guidance for enterprise web apps.",
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": ["<all_urls>"],
+  "options_page": "kb/index.html",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/workflows.js", "src/content.js"],
+      "css": ["src/panel.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

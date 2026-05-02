@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Muongozo Knowledge Base</title>
+    <link rel="stylesheet" href="kb.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Muongozo Knowledge Base</h1>
+      <p>Upload PDF manuals and search their extracted text.</p>
+
+      <section class="card">
+        <label for="pdf-input">Upload PDF manuals</label>
+        <input id="pdf-input" type="file" accept="application/pdf" multiple />
+        <p id="status">No files processed yet.</p>
+      </section>
+
+      <section class="card">
+        <label for="search">Search manuals</label>
+        <input id="search" type="search" placeholder="e.g. reset password" />
+        <div id="results"></div>
+      </section>
+
+      <section class="card">
+        <h2>Stored manuals</h2>
+        <ul id="manual-list"></ul>
+        <button id="clear">Clear knowledge base</button>
+      </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs" type="module"></script>
+    <script src="kb.js" type="module"></script>
+  </body>
+</html>
